@@ -43,7 +43,7 @@ public class Fight
 				diceRollOne = 1 + randomNumber.nextInt(3);
 				diceRollTwo = 1 + randomNumber.nextInt(3);
 				diceRollThree = 1 + randomNumber.nextInt(15);
-				totalDice = (diceRollOne + diceRollTwo + diceRollThree + Loot.fireballBonus + Hero.classFireballBonus + Hero.raceFireballBonus + (LevelUp.magic * 2));
+				totalDice = (diceRollOne + diceRollTwo + diceRollThree + Loot.fireballBonus + Hero.classFireballBonus + Hero.raceFireballBonus + (Hero.magic * 2));
 				Monster.monsterHitPoints = (Monster.monsterHitPoints - totalDice);				
 				System.out.println("You blast the enemy with flames and do " + totalDice + " damage!");
 				Intros.delayOneSecond();
@@ -112,7 +112,7 @@ public class Fight
 				resetDiceForRoll();
 				Random randomNumber = new Random();
 				diceRollOne = 1 + randomNumber.nextInt(10);
-				dodgeAffect = diceRollOne + Hero.classDodgeBonus + Loot.dodgeBonus + Hero.raceDodgeBonus + (LevelUp.agility * 2);
+				dodgeAffect = diceRollOne + Hero.classDodgeBonus + Loot.dodgeBonus + Hero.raceDodgeBonus + (Hero.agility * 2);
 				System.out.println("You prepare to " + Hero.dodgeTypeName + " the enemie's next blow.");
 				System.out.println();
 				Intros.delayOneSecond();
@@ -144,8 +144,8 @@ public class Fight
 					System.out.println();
 					Intros.delayOneSecond();
 					Hero.playerHitPoints = Hero.playerHitPoints + Monster.playerHealthResetCounter;
-					Monster.playerHealthResetCounter = 0;
-					
+					Monster.playerHealthResetCounter = 0;	
+					Fight.chooseAction();
 					//Fight.askPlayerIfTheyWantToPlayAgain();
 					}
 				else
@@ -178,7 +178,7 @@ public class Fight
 			Monster.playerHealthResetCounter = 0;
 			if (MonsterGenerator.bossFight == 1)
 				{
-				LevelUp.levelUp();				
+				Hero.levelUp();				
 				System.out.println("YOU HAVE FOUND A LORE SHARD!");
 				System.out.println();
 				Intros.delayOneSecond();
