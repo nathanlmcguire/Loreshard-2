@@ -21,7 +21,7 @@ public class Fight
 		System.out.println("|                                               ~0~" + Hero.weaponSymbol + "                                           |");
 		System.out.println("|                                                A                                               |");
 		System.out.println("|________________________________________________________________________________________________|");
-		System.out.println(MonsterGenerator.monsterName + "'s HP = " + Monster.monsterHitPoints + " 									" + Hero.nameOfPlayer + "'s HP = " + Hero.playerHitPoints + ".");
+		System.out.println(MonsterGenerator.monsterName + "'s HP = " + Monster.monsterHitPoints + " 						Darkness: " + Hero.darknessMeter + "   " + Hero.nameOfPlayer + "'s HP = " + Hero.playerHitPoints + ".");	
 		System.out.println("Would you like to use a 1) " + Hero.weaponName + ", 2) Fireball Spell, 3) " + Hero.healingTypeName + ",");
 		System.out.println("4) Lightning Blast(do not try unless Level 20), or 5) to use " + Hero.dodgeTypeName + " on the next Atack."); 
 		Scanner userInput1 = new Scanner(System.in);
@@ -43,7 +43,7 @@ public class Fight
 				diceRollOne = 1 + randomNumber.nextInt(3);
 				diceRollTwo = 1 + randomNumber.nextInt(3);
 				diceRollThree = 1 + randomNumber.nextInt(15);
-				totalDice = (diceRollOne + diceRollTwo + diceRollThree + Loot.fireballBonus + Hero.classFireballBonus + Hero.raceFireballBonus);
+				totalDice = (diceRollOne + diceRollTwo + diceRollThree + Loot.fireballBonus + Hero.classFireballBonus + Hero.raceFireballBonus + (LevelUp.magic * 2));
 				Monster.monsterHitPoints = (Monster.monsterHitPoints - totalDice);				
 				System.out.println("You blast the enemy with flames and do " + totalDice + " damage!");
 				Intros.delayOneSecond();
@@ -112,7 +112,7 @@ public class Fight
 				resetDiceForRoll();
 				Random randomNumber = new Random();
 				diceRollOne = 1 + randomNumber.nextInt(10);
-				dodgeAffect = diceRollOne + Hero.classDodgeBonus + Loot.dodgeBonus + Hero.raceDodgeBonus;
+				dodgeAffect = diceRollOne + Hero.classDodgeBonus + Loot.dodgeBonus + Hero.raceDodgeBonus + (LevelUp.agility * 2);
 				System.out.println("You prepare to " + Hero.dodgeTypeName + " the enemie's next blow.");
 				System.out.println();
 				Intros.delayOneSecond();
@@ -124,7 +124,7 @@ public class Fight
 		return actionChoice;
 		}
 	
-	public static int simulateCombat()//The whole combat package which makes it so that you fight until you or the beast is dead.
+	public static void simulateCombat()//The whole combat package which makes it so that you fight until you or the beast is dead.
 		{
 		while(Monster.monsterHitPoints > 0)
 			{
@@ -134,8 +134,25 @@ public class Fight
 				System.out.println("YOU DIED!");
 				System.out.println();
 				Intros.delayOneSecond();
-				Fight.askPlayerIfTheyWantToPlayAgain();
-				}
+				Hero.darknessMeter = Hero.darknessMeter + 10;
+				if (Hero.darknessMeter < 30)
+					{
+					System.out.println("Before your spirit leaves your body it is pulled back by the fire inside.");
+					System.out.println();
+					Intros.delayOneSecond();
+					System.out.println("You have more yet to do in this world.");
+					System.out.println();
+					Intros.delayOneSecond();
+					Hero.playerHitPoints = Hero.playerHitPoints + Monster.playerHealthResetCounter;
+					Monster.playerHealthResetCounter = 0;
+					
+					//Fight.askPlayerIfTheyWantToPlayAgain();
+					}
+				else
+					{
+					System.out.println("YOU ARE CONSUMED BY DARKNESS.");
+					System.exit(0);
+					}
 			if (Hero.playerHitPoints != 0)
 				{
 				Fight.chooseAction();
@@ -161,14 +178,7 @@ public class Fight
 			Monster.playerHealthResetCounter = 0;
 			if (MonsterGenerator.bossFight == 1)
 				{
-				System.out.println("LEVEL UP!");
-				Hero.levelOfPlayer++;
-				System.out.println();
-				Intros.delayOneSecond();
-				System.out.println("You are now a Level " + Hero.levelOfPlayer + "!");
-				Hero.playerHitPoints = Hero.playerHitPoints + (Hero.levelOfPlayer * 2);
-				System.out.println();
-				Intros.delayOneSecond();
+				LevelUp.levelUp();				
 				System.out.println("YOU HAVE FOUND A LORE SHARD!");
 				System.out.println();
 				Intros.delayOneSecond();
@@ -176,9 +186,9 @@ public class Fight
 				System.out.println();
 				Intros.delayOneSecond();
 				}
-			}	
-		return Monster.monsterHitPoints;
-		}
+			}
+		}				
+	}
 	
 	public static int askPlayerIfTheyWantToPlayAgain()//Asks the player if they want to play again or if they want to stop playing.
 		{

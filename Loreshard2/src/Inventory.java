@@ -15,6 +15,7 @@ public class Inventory
 		System.out.println("Apparel: " + Loot.bootOrCloakName + " (" + Loot.dodgeBonus + ")");
 		System.out.println("Potions: " + Hero.numberOfPotions + "");
 		System.out.println("Gold: " + Loot.goldOfPlayer +"");
+		System.out.println("Keystones: " + Loot.playerKeystoneNumber + "");
 		System.out.println("Level: "+ Hero.levelOfPlayer + "");
 		System.out.println();
 		Intros.delayThreeSeconds();

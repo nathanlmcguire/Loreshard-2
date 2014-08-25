@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Hero 
 	{
-	static int playerHitPoints, godHealth, levelOfPlayer = 1;
+	static int playerHitPoints, godHealth, levelOfPlayer = 1, darknessMeter, playerStamina;
 	static int diceRollOne, diceRollTwo, diceRollThree, totalDice;
 	static int difficultyHealth, difficultyDamage, difficultyLevel, nameNumber;
 	static int classWeaponBonus = 0, classFireballBonus = 0, classHealingBonus = 0, classDodgeBonus = 0, raceWeaponBonus = 0, raceFireballBonus = 0, raceHealingBonus = 0, raceDodgeBonus = 0;
@@ -16,6 +16,8 @@ public class Hero
 		{
 	    Random randomNumber = new Random();
 	    playerHitPoints = 10 + randomNumber.nextInt(godHealth + (levelOfPlayer * 10) + Loot.armorBonus + classHealth);
+	    darknessMeter = 0;
+	    playerStamina = 20;
 		System.out.println();
 	    return playerHitPoints;
 	    }
@@ -48,7 +50,7 @@ public class Hero
 		diceRollOne = 2 + randomNumber.nextInt(classDamage);
 		diceRollTwo = 2 + randomNumber.nextInt(classDamage);
 		diceRollThree = 2 + randomNumber.nextInt(classDamage);
-		totalDice = (diceRollOne + diceRollTwo + diceRollThree + Loot.weaponBonus + classWeaponBonus + raceWeaponBonus);
+		totalDice = (diceRollOne + diceRollTwo + diceRollThree + Loot.weaponBonus + classWeaponBonus + raceWeaponBonus + (LevelUp.strength * 2));
 		Monster.monsterHitPoints = (Monster.monsterHitPoints - totalDice);
 		System.out.println("You swing your " + weaponName + " and do " + totalDice + " damage!");
 		Intros.delayOneSecond();

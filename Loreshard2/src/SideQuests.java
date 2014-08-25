@@ -292,14 +292,7 @@ public class SideQuests
 				System.out.println("Here let me teach you what I know.");
 				System.out.println();
 				Intros.delayThreeSeconds();
-				System.out.println("LEVEL UP!");
-				Hero.levelOfPlayer++;
-				System.out.println();
-				Intros.delayOneSecond();
-				System.out.println("You are now a Level " + Hero.levelOfPlayer + "!");
-				Hero.playerHitPoints = Hero.playerHitPoints + (Hero.levelOfPlayer * 5);
-				System.out.println();
-				Intros.delayOneSecond();
+				LevelUp.levelUp();
 				}
 			if (randomOutcomeNumber == 2)
 				{
@@ -422,45 +415,63 @@ public class SideQuests
 		System.out.println("You try the handle, but it is locked.  There must be treasure behind it.");
 		System.out.println();
 		Intros.delayThreeSeconds();
-		System.out.println("Do you want to try to pick the lock? Type 1 for yes, and 2 for no.");
+		System.out.println("Do you want to try to pick the lock? Type 1 for yes, and 2 for no.(If you have a Keystone it will be automatically used.)");
 		Scanner userInput3 = new Scanner(System.in);
 		tryDoorChoice = userInput3.nextInt();
-		if (tryDoorChoice == 1)
+		if (Loot.playerKeystoneNumber >= 1)
 			{
-			System.out.println("You put your tools into the lock, and begin to pick it.  (Type the numbers you see to open the door)");
+			Loot.playerKeystoneNumber = Loot.playerKeystoneNumber - 1;
+			System.out.println("You pull the Keystone out of your pack, and hold it up to the lock.");
 			System.out.println();
 			Intros.delayThreeSeconds();
-			generateLockNubmers();
-			System.out.println("Type the number exactly as you saw it.");
-			Scanner userInput2 = new Scanner(System.in);
-			lockChoice = userInput2.nextInt();
-			if(lockChoice == lockNumberOne)
-				{
-				System.out.println("You open the door, and behind it is treasure!");
-				System.out.println();
-				Intros.delayOneSecond();
-				Loot.lootBeast();
-				Intros.delayOneSecond();
-				}
-			if(lockChoice != lockNumberOne)
-				{
-				System.out.println("You fail to open the door, and you spring a trap!");
-				System.out.println();
-				Intros.delayOneSecond();
-				Hero.playerHitPoints = Hero.playerHitPoints - 3;
-				System.out.println("Arrows fly out of the door and take away 3 of your hit points!");
-				System.out.println();
-				Intros.delayOneSecond();
-				System.out.println("You limp away from the door, and continue on your journey.");
-				System.out.println();
-				Intros.delayOneSecond();
-				}
-			}
-		if (tryDoorChoice == 2)
-			{
-			System.out.println("You walk away from the door.  There could be traps behind it.");
+			System.out.println("The lock and the stone glow blue.");	
+			System.out.println();
+			Intros.delayThreeSeconds();
+			System.out.println("The stone fades away and the door clicks open, revealing the treasure inside.");
 			System.out.println();
 			Intros.delayOneSecond();
+			Loot.lootBeast();
+			Intros.delayOneSecond();			
+			}
+		else
+			{
+			if (tryDoorChoice == 1)
+				{
+				System.out.println("You put your tools into the lock, and begin to pick it.  (Type the numbers you see to open the door)");
+				System.out.println();
+				Intros.delayThreeSeconds();
+				generateLockNubmers();
+				System.out.println("Type the number exactly as you saw it.");
+				Scanner userInput2 = new Scanner(System.in);
+				lockChoice = userInput2.nextInt();
+				if(lockChoice == lockNumberOne)
+					{
+					System.out.println("You open the door, and behind it is treasure!");
+					System.out.println();
+					Intros.delayOneSecond();
+					Loot.lootBeast();
+					Intros.delayOneSecond();
+					}
+				else if(lockChoice != lockNumberOne)
+					{
+					System.out.println("You fail to open the door, and you spring a trap!");
+					System.out.println();
+					Intros.delayOneSecond();
+					Hero.playerHitPoints = Hero.playerHitPoints - 3;
+					System.out.println("Arrows fly out of the door and take away 3 of your hit points!");
+					System.out.println();
+					Intros.delayOneSecond();
+					System.out.println("You limp away from the door, and continue on your journey.");
+					System.out.println();
+					Intros.delayOneSecond();
+					}
+				}
+			if (tryDoorChoice == 2)
+				{
+				System.out.println("You walk away from the door.  There could be traps behind it.");
+				System.out.println();
+				Intros.delayOneSecond();
+				}
 			}
 		return tryDoorChoice;
 		}

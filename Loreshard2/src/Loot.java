@@ -5,7 +5,7 @@ public class Loot
 	{
 	static int forageNumber, lootNumber, findingLuck, playerLuck, dodgeAffect = 0; 
 	static int armorBonus = 0, weaponBonus = 0, fireballBonus = 0, healingSpellBonus = 0, dodgeBonus = 0;
-	static int weight, goldOfPlayer = 30, itemID;
+	static int weight, goldOfPlayer = 30, itemID, playerKeystoneNumber;
 	static String armorName = "Leather Armor", fireItemName = "Training Fire Scroll", healingItemName = "Training Healing Scroll", bootOrCloakName = "Training Boots";
 	
 	public static int lootBeast()//Randomly generates loot from the dead beast.(Only if you killed it.) 30 different items!
@@ -521,6 +521,32 @@ public class Loot
 				System.out.println();
 				break;		
 				}
+			case 102:
+			case 103:
+				{
+				System.out.println("You have found a Keystone!");
+				System.out.println();
+				System.out.println("Level 4 Item.");
+				System.out.println();
+				playerKeystoneNumber = playerKeystoneNumber + 1;
+				System.out.println("You have " + playerKeystoneNumber + " Keystone(s) now.");
+				System.out.println();
+				break;
+				}
+			case 104:
+			case 105:
+			case 106:
+				{
+				System.out.println("You have found a Flask of Renewal!");
+				System.out.println();
+				System.out.println("Level 3 Item.");
+				System.out.println();
+				Hero.darknessMeter = 0;
+				Hero.playerHitPoints = Hero.playerHitPoints + 5;
+				System.out.println("You have rejuvinated youself and your darkness is at 0, and your health and stamina are plus five.");
+				System.out.println();
+				break;
+				}
 			}
 		return lootNumber;
 		}
@@ -528,7 +554,7 @@ public class Loot
 	public static int generateNumber()//Generates the random number for the lootBeast method.
 		{
 		Random randomNumber = new Random();
-		lootNumber = 1 + randomNumber.nextInt(94);
+		lootNumber = 1 + randomNumber.nextInt(103);
 		return lootNumber;
 		}	
 	
