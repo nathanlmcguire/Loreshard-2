@@ -57,7 +57,7 @@ public class Fight
 					diceRollOne = 1 + randomNumber.nextInt(Hero.healingName);
 					diceRollTwo = 1 + randomNumber.nextInt(Hero.healingName);
 					diceRollThree = 1 + randomNumber.nextInt(Hero.healingName);
-					totalDice = diceRollOne + diceRollTwo + diceRollThree + Loot.healingSpellBonus + Hero.classHealingBonus + Hero.raceHealingBonus;
+					totalDice = diceRollOne + diceRollTwo + diceRollThree + Loot.healingSpellBonus + Hero.classHealingBonus + Hero.raceHealingBonus + Hero.magic;
 					Hero.playerHitPoints = (Hero.playerHitPoints + totalDice);
 					System.out.println("You heal yourself " + totalDice + " points of health with your " + Hero.healingTypeName + "!");
 					Intros.delayOneSecond();
@@ -145,7 +145,6 @@ public class Fight
 					Intros.delayOneSecond();
 					Hero.playerHitPoints = Hero.playerHitPoints + Monster.playerHealthResetCounter;
 					Monster.playerHealthResetCounter = 0;	
-					Fight.chooseAction();
 					//Fight.askPlayerIfTheyWantToPlayAgain();
 					}
 				else
@@ -194,12 +193,12 @@ public class Fight
 		{
 		Hero.playerHitPoints = Hero.playerHitPoints + Monster.playerHealthResetCounter;
 		Monster.playerHealthResetCounter = 0;
-		System.out.println("Would you like to play again/continue " + Hero.nameOfPlayer + "?");
+		System.out.println("Would you like to continue " + Hero.nameOfPlayer + "?");
 		System.out.println();
 		Intros.delayOneSecond();
 		System.out.println("Or does " + Hero.homeLand + " need you?");
 		System.out.println();
-		System.out.println("Press 1 to play again/continue and press 2 to exit the game.");
+		System.out.println("Press 1 to continue and press 2 to exit the game.");
 		Scanner userInput1 = new Scanner(System.in);
 		playAgainChoice = userInput1.nextInt();
 		if (playAgainChoice == 2)
