@@ -331,7 +331,8 @@ public class Hero
 	    		endurance = endurance + 1;
 	    		System.out.println("Over the past weeks you have become hardier.");
 	    		Intros.delayThreeSeconds();
-	    		System.out.println();	    		
+	    		System.out.println();	 
+	    		break;
 	    		}
 	    	case 2:
 	    		{
@@ -339,6 +340,7 @@ public class Hero
 	    		System.out.println("Over the past weeks your attacks have become more precise.");
 	    		Intros.delayThreeSeconds();
 	    		System.out.println();
+	    		break;
 	    		}
 	    	case 3:
 	    		{
@@ -346,6 +348,7 @@ public class Hero
 	    		System.out.println("Over the past weeks your magic has grown in strength.");
 	    		Intros.delayThreeSeconds();
 	    		System.out.println();
+	    		break;
 	    		}
 	    	case 4:
 	    		{
@@ -353,6 +356,7 @@ public class Hero
 	    		System.out.println("Over the past weeks you have become more fluent in the language of persuasion.");
 	    		Intros.delayThreeSeconds();
 	    		System.out.println();
+	    		break;
 	    		}
 	    	case 5:
 	    		{
@@ -360,10 +364,12 @@ public class Hero
 	    		System.out.println("Over the past weeks you have become lighter and quicker on your feet.");
 	    		Intros.delayThreeSeconds();
 	    		System.out.println();
+	    		break;
 	    		}
 	    	default:
 	    		{
 	    		System.out.println("YOU FOOL! THAT IS NOT A SKILL NUMBER!!!! NO SKILLPOINT FOR YOU!!!!!!");
+	    		break;
 	    		}
 	    	}
 	    Hero.playerHitPoints = Hero.playerHitPoints + (Hero.levelOfPlayer * 2) + (endurance * 2);	

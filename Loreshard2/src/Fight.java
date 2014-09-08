@@ -57,7 +57,7 @@ public class Fight
 					diceRollOne = 1 + randomNumber.nextInt(Hero.healingName);
 					diceRollTwo = 1 + randomNumber.nextInt(Hero.healingName);
 					diceRollThree = 1 + randomNumber.nextInt(Hero.healingName);
-					totalDice = diceRollOne + diceRollTwo + diceRollThree + Loot.healingSpellBonus + Hero.classHealingBonus + Hero.raceHealingBonus + Hero.magic;
+					totalDice = diceRollOne + diceRollTwo + diceRollThree + Loot.healingSpellBonus + Hero.classHealingBonus + Hero.raceHealingBonus + (Hero.magic * 2);
 					Hero.playerHitPoints = (Hero.playerHitPoints + totalDice);
 					System.out.println("You heal yourself " + totalDice + " points of health with your " + Hero.healingTypeName + "!");
 					Intros.delayOneSecond();
@@ -86,7 +86,7 @@ public class Fight
 					diceRollOne = 50 + randomNumber.nextInt(100);
 					diceRollTwo = 50 + randomNumber.nextInt(100);
 					diceRollThree = 50 + randomNumber.nextInt(100);
-					totalDice = diceRollOne + diceRollTwo + diceRollThree;
+					totalDice = diceRollOne + diceRollTwo + diceRollThree + (Hero.magic * 2);
 					Monster.monsterHitPoints = (Monster.monsterHitPoints - totalDice);
 					System.out.println("Lightning archs towards the beast doing " + totalDice + " damage");
 					Intros.delayOneSecond();
